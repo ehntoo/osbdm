@@ -1,0 +1,50 @@
+; osbdm tester script - HCS12
+; 
+; special version for DP256 - manually set's BDM clock freq for oscillator running at 4Mhz
+;
+; For this script to work a valid program must be programed in target flash 
+; starting at $C000 and the reset vector set there also
+
+;sspeed 4.0	; set BDM clock freq (4mhz)
+sspeed 16.0	; set BDM clock freq (16mhz)
+
+reset 1	; hardware reset normal (run) mode
+dd ff01	; read bdm status
+halt
+dd ff01	; read bdm status
+step
+dr d4	; display PC
+step
+dr d4	; display PC
+
+reset 2	; hardware reset to halt mode
+dd ff01	; read bdm status
+
+mmr d4 c000	; change PC to c000
+dr d4	; display PC
+
+go
+dd ff01	; read bdm status
+halt
+dd ff01	; read bdm status
+
+dr d4	; display PC
+step
+dr d4	; display PC
+
+; 32-bit memory read/write
+mml 1000 FFFFFFFF
+dl 1000
+mml 1000 12345678
+dl 1000
+
+; modify stack pointer
+mmr d3 FFFF
+mmr d3 1234
+dr d3
+
+; block memory r/w test
+testmem 8 1000 1200	; 8-bit 
+testmem 16 1000 1200	; 16-bit 
+testmem 32 1000 1200	; 32-bit 
+

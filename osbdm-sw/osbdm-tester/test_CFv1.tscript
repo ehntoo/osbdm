@@ -1,0 +1,32 @@
+; osbdm tester example script - CFV1
+;-------------------------------------------------------------------------------
+log test_CFv1.tscript test output
+target CFV1
+
+reset 0 ; eSoftReset_to_DebugMode
+dd 0	; display BDM status register
+dd 0	; display BDM status register
+
+dc F ; display program counter
+go
+dd 0	; display BDM status register
+halt
+dd 0	; display BDM status register
+dc F  ; display program counter
+step
+dc F  ; display program counter
+
+log -----------------------------------
+log --- memory i/o
+mmw 800000 1234
+dw 800000
+mml 800200 12345678
+dl 800200
+
+log -----------------------------------
+log -----------------------------------
+log ------- Test memory - 8/16/32 bit
+
+testmem 8 800000 800100		; 8-bit 
+testmem 16 800000 800200		; 16-bit 
+testmem 32 800000 800300		; 32-bit 

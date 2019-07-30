@@ -1,0 +1,35 @@
+; osbdm tester example script - HCRS08
+;-------------------------------------------------------------------------------
+log test_RS08.tscript test output
+target RS08
+
+reset 0 ; eSoftReset_to_DebugMode
+dd 0	; display BDM status register
+dr d4 ; display program counter
+go
+dd 0	; display BDM status register
+halt
+dd 0	; display BDM status register
+dr d4 ; display program counter
+step
+dr d4 ; display program counter
+
+reset 0 ; eSoftReset_to_DebugMode
+
+log -----------------------------------
+log --- memory i/o
+mmb 1 A5
+db 1
+mmw 0 1234
+dw 0
+mml 30 12345678
+dl 30
+
+log -----------------------------------
+log -----------------------------------
+log ------- Test memory - 8/16/32 bit
+
+testmem 8 0 A		; 8-bit 
+testmem 16 30 40	; 16-bit 
+testmem 32 34 40 	; 32-bit 
+

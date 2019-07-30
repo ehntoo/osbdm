@@ -1,0 +1,100 @@
+[Version]
+Signature = "$Chicago$"
+provider  = %manufacturer%
+DriverVer = 01/07/2011,1.2.2.0
+CatalogFile = OSBDM_drivers.cat
+
+Class = LibUsbDevices
+ClassGUID = {EB781AAF-9C70-4523-A5DF-642A87ECA567}
+
+[ClassInstall]
+AddReg=ClassInstall.AddReg
+
+[ClassInstall32]
+AddReg=ClassInstall.AddReg
+
+[ClassInstall.AddReg]
+HKR,,,,"LibUSB-Win32 Devices"
+HKR,,Icon,,"-20"
+
+[Manufacturer]
+%manufacturer%=Devices,NTamd64
+
+;--------------------------------------------------------------------------
+; Files
+;--------------------------------------------------------------------------
+
+[SourceDisksNames]
+; diskid = description, tagfile, unused, subdir
+
+;1 = "Libusb-Win32 Driver Installation Disk",,,\x32
+1 = "Libusb-Win32 Driver Installation Disk",,,
+
+
+
+[SourceDisksFiles]
+;filename = diskid,subdir, size
+
+libusb0.sys = 1,\redist,
+libusb0.dll = 1,\redist,
+
+[DestinationDirs]
+LIBUSB.Files.Sys = 10,System32\Drivers
+LIBUSB.Files.Dll = 10,SysWOW64
+
+[LIBUSB.Files.Sys]
+libusb0.sys
+
+[LIBUSB.Files.Dll]
+libusb0.dll
+;--------------------------------------------------------------------------
+; Device driver
+;--------------------------------------------------------------------------
+
+[LIBUSB_DEV]
+CopyFiles = LIBUSB.Files.Sys, LIBUSB.Files.Dll
+AddReg    = LIBUSB_DEV.AddReg
+
+[LIBUSB_DEV.NT]
+CopyFiles = LIBUSB.Files.Sys, LIBUSB.Files.Dll
+
+[LIBUSB_DEV.HW]
+DelReg = LIBUSB_DEV.DelReg.HW
+
+[LIBUSB_DEV.NT.HW]
+DelReg = LIBUSB_DEV.DelReg.HW
+
+[LIBUSB_DEV.NT.Services]
+AddService = libusb0, 0x00000002, LIBUSB.AddService
+
+[LIBUSB_DEV.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,libusb0.sys
+
+[LIBUSB_DEV.DelReg.HW]
+HKR,,"LowerFilters"
+
+;--------------------------------------------------------------------------
+; Services
+;--------------------------------------------------------------------------
+
+[LIBUSB.AddService]
+DisplayName    = "LibUsb-Win32 - Kernel Driver v1.2.2.0"
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 0
+ServiceBinary  = %12%\libusb0.sys
+
+;--------------------------------------------------------------------------
+; Devices
+;--------------------------------------------------------------------------
+
+[Devices]
+"Open Source BDM - Bootloader Port"=LIBUSB_DEV, USB\VID_15A2&PID_0035
+
+[Devices.NTamd64]
+"Open Source BDM - Bootloader Port"=LIBUSB_DEV, USB\VID_15A2&PID_0035
+
+[Strings]
+manufacturer = "Freescale, P&E Micro (http://www.pemicro.com/osbdm)"
+

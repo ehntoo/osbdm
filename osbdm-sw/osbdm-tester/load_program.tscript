@@ -1,0 +1,23 @@
+; osbdm tester example script
+; loading a program
+
+reset
+halt
+
+delay 10	; delay 10 ms
+
+; Set VBR to the beginning of what will be SRAM
+mmc 801 20000000
+
+; Set SRAM to 0x2000:0000
+mmc C05 20000021
+
+; Set Flash to 0x0000:0000
+mmc C04 00000061
+
+mmb 40100051 FF	; enable PST[0:3]
+
+; load s-record file into memory
+load F:\projects\OSBDM\test\5213Test3\bin\M5213EVB_INTERNAL_RAM.elf.S19
+pc 20000DC4	; set program counter
+stat	; get status

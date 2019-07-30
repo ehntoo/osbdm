@@ -1,0 +1,40 @@
+﻿Build started 10-7-2010 3:03:07 AM.
+     1>Project "C:\products\osbdm\osbdm-JM60_b26_05062010_windows_modified\osbdm-sw\osbdm-pc\osbdmusb\src\osbdm_dll.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file ".\Release\osbdm_dll.lastbuildstate".
+     1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(299,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+       InitializeBuildStatus:
+         Creating ".\Release\osbdm_dll.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"..\..\..\osbdm-common\src" /I..\libusb\lib\msvc /I..\libusb\include /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D OpenSourceBDM_dll_EXPORTS /D _VC80_UPGRADE=0x0600 /D _WINDLL /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Release/" /Fd".\Release/vc100.pdb" /Gd /TC /analyze- /errorReport:prompt log.c osbdm_api.c osbdm_base.c osbdm_dll.c osbdm_usb.c osbdm_utils.c
+         log.c
+         osbdm_api.c
+         osbdm_base.c
+     1>osbdm_base.c(103): warning C4018: '>=' : signed/unsigned mismatch
+         osbdm_dll.c
+         osbdm_usb.c
+         osbdm_utils.c
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D NDEBUG /D _VC80_UPGRADE=0x0600 /l"0x0409" /nologo /fo".\Release\osbdm_dll.res" osbdm_dll.rc 
+       Link:
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\products\icd\peosbdmv1.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\Libraries\libusb\lib\msvc\ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Release\peosbdmv1.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Release/osbdm-jm60.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\bin/osbdm-jm60.lib" /MACHINE:X86 /DLL .\Release\osbdm_dll.res
+         .\Release/log.obj
+         .\Release/osbdm_api.obj
+         .\Release/osbdm_base.obj
+         .\Release/osbdm_dll.obj
+         .\Release/osbdm_usb.obj
+         .\Release/osbdm_utils.obj
+         ..\libusb\lib\msvc\libusb.lib
+            Creating library ..\bin/osbdm-jm60.lib and object ..\bin/osbdm-jm60.exp
+         osbdm_dll.vcxproj -> c:\products\icd\peosbdmv1.dll
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"c:\products\icd\peosbdmv1.dll;#2" /manifest .\Release\peosbdmv1.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file ".\Release\osbdm_dll.unsuccessfulbuild".
+         Touching ".\Release\osbdm_dll.lastbuildstate".
+     1>Done Building Project "C:\products\osbdm\osbdm-JM60_b26_05062010_windows_modified\osbdm-sw\osbdm-pc\osbdmusb\src\osbdm_dll.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.07

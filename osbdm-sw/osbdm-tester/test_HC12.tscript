@@ -1,0 +1,45 @@
+; osbdm tester script - HCS12
+;
+; For this script to work a valid program must be programed in target flash 
+; starting at $C000 and the reset vector set there also
+
+reset 1	; hardware reset normal (run) mode
+dd ff01	; read bdm status
+halt
+dd ff01	; read bdm status
+step
+dr d4	; display PC
+step
+dr d4	; display PC
+
+reset 2	; hardware reset to halt mode
+dd ff01	; read bdm status
+
+mmr d4 c000	; change PC to c000
+dr d4	; display PC
+
+go
+dd ff01	; read bdm status
+halt
+dd ff01	; read bdm status
+
+dr d4	; display PC
+step
+dr d4	; display PC
+
+; 32-bit memory read/write
+mml 800 FFFFFFFF
+dl 800
+mml 800 12345678
+dl 800
+
+; modify stack pointer
+mmr d3 FFFF
+mmr d3 1234
+dr d3
+
+; block memory r/w test
+testmem 8 800 1200	; 8-bit 
+testmem 16 800 1200	; 16-bit 
+testmem 32 800 1200	; 32-bit 
+

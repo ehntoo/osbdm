@@ -1,0 +1,4 @@
+BUS=="usb", SYSFS{idVendor}=="15a2", SYSFS{idProduct}=="0035", SYMLINK+="osbdm-jm60-boot%n", MODE:="0666"
+BUS=="usb", SYSFS{idVendor}=="15a2", SYSFS{idProduct}=="0042", SYMLINK+="osbdm-jm60%n", MODE:="0666"
+BUS=="usb", SYSFS{idVendor}=="15a2", SYSFS{idProduct}=="0058", SYMLINK+="osbdm-jm60%n", MODE:="0666"
+

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{53d28fc9-ec61-4344-8a4a-fac8274ef64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{a419c3ee-32a7-420c-8de0-cb20d0c59f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{142ab25d-35f1-485f-a3f0-9ca2e1db8ad2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\libusb\lib\msvc\libusb.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="log.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_api.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_base.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_cfv1.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_cfv234.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_def.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_dsc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_hwdesc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_rs08.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_s08.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_s12.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="osbdm_usb.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libusb\include\usb.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="osbdm_dll.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="log.c" />
+    <ClCompile Include="osbdm_api.c" />
+    <ClCompile Include="osbdm_base.c" />
+    <ClCompile Include="osbdm_dll.c" />
+    <ClCompile Include="osbdm_usb.c" />
+    <ClCompile Include="osbdm_utils.c" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,182 @@
+; osbdm tester example script - DSC
+;-------------------------------------------------------------------------------
+log test_DSC.tscript test output
+target DSC
+reset
+halt                    ;reset followed by halt is not good enough
+;-------------------------------------------------------------------------------
+
+log ------- display OSR, LSB = 3x -> debug, LSB = 0x -> run
+dc  29
+
+log ---------------------------------------
+log ---------------------------------------
+log ------- Load and execute sample program
+
+mmw 8000 E481			;move.w   #1,X0
+mmw 8001 E482			;move.w   #2,X0
+mmw 8002 E483			;move.w   #3,X0
+mmw 8003 E484			;move.w   #4,X0
+mmw 8004 E485			;move.w   #5,X0
+mmw 8005 E486			;move.w   #6,X0
+mmw 8006 E487			;move.w   #7,X0
+mmw 8007 A978			;bra      *-7
+mdw 8000 32 p
+
+; --- note this method works also
+; "load16" uses the standard s-record format, ignoring the checksum byte
+; start with S1 followed by the byte count (including address), address, data, end with 00
+;load16 S1138000E481E482E483E484E485E486E487A97800
+
+log ------- dump program code
+mdw 8000 32 p 
+
+
+; Initialize registers
+mmc 25 8000             ;PC
+mmc  0 0                ;X0
+dc   0
+
+;waitforkey	; wait keypress
+
+; STEP TEST ONE
+; X0 = 1
+step
+dc 25
+dc 0
+
+; STEP TEST TWO
+; X0 = 2
+step
+dc 25
+dc 0
+
+; STEP TEST THREE
+; X0 = 3
+step
+dc 25
+dc 0
+
+
+; STEP TEST FOUR
+; X0 = 4
+step
+dc 25
+dc 0
+
+; RUN TEST FIVE
+; X0 = 5
+step
+dc 25
+dc 0
+
+; RUN TEST SIX
+; X0 = 6
+step
+dc 25
+dc 0
+
+; RUN TEST SEVEN
+; X0 = 7
+step
+dc 25
+dc 0
+
+; RUN TEST EIGHT
+; X0 = 7
+step
+dc 25
+dc 0
+
+; RUN TEST NINE
+; X0 = 1
+step
+dc 25
+dc 0
+
+log -----------------------------------
+log -----------------------------------
+log ------- Test X memory - 8/16/32 bit
+
+log ------- clear memory before test
+mml 0 FFFFFFFF x
+mml 2 FFFFFFFF x
+md 0 32 x		; 8-bit dump
+
+log ------- Write bytes to X mem
+mmb 0 12 x
+mmb 1 34 x
+mmb 2 56 x
+mmb 3 78 x
+
+mmb 4 aa x
+mmb 5 bb x
+mmb 6 cc x
+mmb 7 dd x
+
+log ------- Display Results
+md 0 32 x		; 8-bit dump
+mdw 0 32 x	; 16-bit dump
+mdl 0 32 x	; 32-bit dump
+
+log ------- Write words to X mem
+
+mmw 0 aabb
+mmw 1 ccdd
+mmw 2 eeff
+mmw 3 0011
+
+log ------- Display Results
+md 0 32 x		; 8-bit dump
+mdw 0 32 x	; 16-bit dump
+mdl 0 32 x	; 32-bit dump
+
+log ------- Write long words to X mem
+
+mml 6 12345678
+mml 8 aabbccdd
+
+log ------- Display Results
+dl 6
+dl 8
+
+log -----------------------------------
+log ------- Test P memory - 16 bit only
+
+log -- Clear memory before test
+mmw 8000 FFFF p
+mmw 8001 FFFF p
+mmw 8002 FFFF p
+mmw 8003 FFFF p
+
+mdw 8000 32 p		; 16-bit dump
+
+log ------- Write words to P mem
+mmw 8000 1122 p
+mmw 8001 3344 p
+mmw 8002 5566 p
+mmw 8003 7788 p
+
+log ------- Display Results
+mdw 8000 32 p	; 16-bit dump
+
+log -----------------------------------
+log ------- Test Flash memory - 16 bit only
+
+unsecure	; unsecure and erase flash
+fdw 100
+fdw 102
+
+fmw 100 1234 p
+fmw 101 5678 p
+
+fmw 2fc aabb p
+fmw 2fe ccdd p
+
+fdw 100
+fdw 101
+fdw 2fc
+fdw 2fe
+
+log ------- end of test
+
